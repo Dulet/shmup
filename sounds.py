@@ -1,0 +1,7 @@
+import pygame
+
+class Sounds():
+    def __init__(self):
+
+        self.fire = pygame.mixer.Sound('sounds/6.wav')
+        self.boom = pygame.mixer.Sound('sounds/boom.wav')
