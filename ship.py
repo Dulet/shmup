@@ -4,14 +4,14 @@ import time #autofire
 
 class Ship:
 
-    def __init__(self, ai_settings, screen):
+    def __init__(self, ai_settings, screen, images):
         """get a ship and set its position"""
         self.screen = screen
         self.ai_settings = ai_settings
 
         # load the ship image and get the rectangle of it
 
-        self.image = pygame.image.load('images/ship2.png')
+        self.image = images.ship
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -29,7 +29,7 @@ class Ship:
         self.moving_down = False
         self.fire = False # autofire
 
-    def update(self, bullets, ai_settings, screen, ship, sounds):
+    def update(self, bullets, ai_settings, screen, ship, sounds, images):
         """update the ship movement depending on keypress"""
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
@@ -43,7 +43,7 @@ class Ship:
         if self.fire and len(bullets) < ai_settings.bullets_allowed:
             if ai_settings.fire_cooldown == ai_settings.shoot_cooldown:
                 ai_settings.fire_cooldown = 0
-                new_bullet = Bullet(ai_settings, screen, ship)
+                new_bullet = Bullet(ai_settings, screen, ship, images)
                 bullets.add(new_bullet)
                 sounds.fire.play()
             else:

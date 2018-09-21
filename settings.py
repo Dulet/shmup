@@ -59,3 +59,5 @@ class Settings():
         self.alien_speed = 1
         self.frame_count = 0
         self.next_level = 1
+        self.bullet_speed_factor = 10
+        self.bullets_allowed = 5

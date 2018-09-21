@@ -5,16 +5,16 @@ from pygame.sprite import Sprite
 
 
 class Alien(Sprite):
-    """a class to represent alien, shocking huh?"""
+    """a class to represent alien"""
 
-    def __init__(self, ai_settings, screen):
+    def __init__(self, ai_settings, screen, images):
         """let us begin making this hellish alien"""
         super(Alien, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
         # load the god damn alien from the image
-        self.image = pygame.image.load("images/alienred.png")
+        self.image = images.alien
         self.rect = self.image.get_rect()
 
         # start new alien from top left of the screen
@@ -27,7 +27,6 @@ class Alien(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-        self.health = 10
 
     def blitme(self):
         """draw alien on le screen"""

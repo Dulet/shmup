@@ -7,6 +7,7 @@ from button import Button
 from scoreboard import Scoreboard
 from counter import Counter
 from sounds import Sounds
+from images import Images
 import game_functions as gf
 
 
@@ -29,15 +30,16 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
     play_button = Button(ai_settings, screen, "Play")
     # make a ship, bullet, alien
-    ship = Ship(ai_settings, screen)
+    sounds = Sounds()
+    images = Images()
     bullets = Group()
     aliens = Group()
     stars = Group()
     powerups = Group()
+    ship = Ship(ai_settings, screen, images)
     stats = GameStats(ai_settings)
     sb = Scoreboard(ai_settings, screen, stats)
     counter = Counter(ai_settings, screen, stats)
-    sounds = Sounds()
 
     # create a fleet
     if stats.game_active:
@@ -47,22 +49,23 @@ def run_game():
     # main game loop
 
     while True:
-        gf.check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds)
-        gf.update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets, play_button, counter, powerups, sounds)
+        gf.check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds, images)
+        gf.update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets,
+                         play_button, counter, powerups, sounds)
         if stats.game_active:
             gf.update_bullets(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds)
             gf.create_stars(ai_settings, screen, stars)
-            gf.create_powerup(ai_settings, screen, powerups)
-            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
+            gf.create_powerup(ai_settings, screen, powerups, images)
+            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets, images)
             gf.update_stars(stars, ai_settings)
             gf.update_powerup(powerups, ai_settings)
             gf.update_timer(ai_settings)
-            gf.powerup_check(ship, powerups, ai_settings)
+            gf.powerup_check(ship, powerups, ai_settings, images)
             bullets.update()
             stars.update()
             powerups.update()
             aliens.update()
-            ship.update(bullets, ai_settings, screen, ship, sounds)
+            ship.update(bullets, ai_settings, screen, ship, sounds, images)
             screen.fill(ai_settings.bg_color)
             # screen.blit(BackGround.image, BackGround.rect)
 

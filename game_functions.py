@@ -13,14 +13,14 @@ frame_rate = 60
 start_time = 90
 
 
-def check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds):
+def check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds, images):
     """responds to specific keypresses and mouse events"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets, sounds)
+            check_keydown_events(event, ai_settings, screen, ship, bullets, sounds, images)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -34,7 +34,7 @@ def check_play_button(stats, play_button, mouse_x, mouse_y):
         pygame.mouse.set_visible(False)
 
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds):
+def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds, images):
     if event.key == pygame.K_RIGHT:
         ship.moving_right = True
     elif event.key == pygame.K_LEFT:
@@ -47,7 +47,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds):
         if ai_settings.autofire:
             ship.fire = True
         else:
-            fire_bullet(ai_settings, screen, ship, bullets, sounds)
+            fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
 
 
 def check_keyup_events(event, ship):
@@ -79,10 +79,10 @@ def update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets, 
     pygame.display.flip()
     level_up(ai_settings)
 
-def fire_bullet(ai_settings, screen, ship, bullets, sounds):
+def fire_bullet(ai_settings, screen, ship, bullets, sounds, images):
     if len(bullets) < ai_settings.bullets_allowed:
         sounds.fire.play()
-        new_bullet = Bullet(ai_settings, screen, ship)
+        new_bullet = Bullet(ai_settings, screen, ship, images)
         bullets.add(new_bullet)
 
 
@@ -107,13 +107,13 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets, sb
     #   pygame.sprite.groupcollide(bullets, aliens, True, True)
 
 
-def create_powerup(ai_settings, screen, powerups):
+def create_powerup(ai_settings, screen, powerups, images):
     number_powerup_x = ai_settings.powerup_allowed
     for powerup_amount in range(number_powerup_x):
         if len(powerups) < number_powerup_x:
-            if ai_settings.frame_count/60 - ai_settings.autofire_timer > 25:
-                print("d*ge juice spawned")
-                powerup = Powerup(ai_settings, screen)
+            if ai_settings.frame_count/60 - ai_settings.autofire_timer > 5:
+                print("powerup spawned")
+                powerup = Powerup(ai_settings, screen, images)
                 powerups.add(powerup)
 
 
@@ -135,11 +135,11 @@ def create_stars(ai_settings, screen, stars):
             star = Star(ai_settings, screen)
             stars.add(star)
 
-def create_alien(ai_settings, screen, aliens):
+def create_alien(ai_settings, screen, aliens, images):
     number_aliens_x = ai_settings.aliens_allowed
     for alien_amount in range(number_aliens_x):
         if len(aliens) < number_aliens_x:
-            alien = Alien(ai_settings, screen)
+            alien = Alien(ai_settings, screen, images)
             aliens.add(alien)
 
 def check_aliens_bottom (screen, aliens):
@@ -148,8 +148,8 @@ def check_aliens_bottom (screen, aliens):
         if alien.rect.bottom >= screen_rect.bottom:
             aliens.remove(alien)
 
-def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
-    create_alien(ai_settings, screen, aliens)
+def update_aliens(ai_settings, stats, screen, ship, aliens, bullets, images):
+    create_alien(ai_settings, screen, aliens, images)
     aliens.update()
     if pygame.sprite.spritecollide(ship, aliens, False):
         ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
@@ -163,14 +163,19 @@ def update_timer(ai_settings):
     clock.tick(frame_rate)
     return total_seconds
 
-def powerup_check(ship, powerups, ai_settings):
+def powerup_check(ship, powerups, ai_settings, images):
     hits = pygame.sprite.spritecollide(ship, powerups, True)
-    if hits:
-        ai_settings.autofire = True
-        ai_settings.bullets_allowed += 10
-        ai_settings.autofire_timer = int(ai_settings.frame_count/60)
+    for hit in hits:
+        if hit.type == 'autofire':
+            ai_settings.autofire = True
+            ai_settings.bullets_allowed += 10
+            ai_settings.autofire_timer = int(ai_settings.frame_count/60)
+        if hit.type == 'pierce':
+            ai_settings.bullet_speed_factor += 2
+            ai_settings.bullets_allowed += 1
+
     if ai_settings.autofire:
-        if int(ai_settings.frame_count / 60) - ai_settings.autofire_timer > 10:
+        if int(ai_settings.frame_count / 60) - ai_settings.autofire_timer > 15:
             ai_settings.autofire = False
             ai_settings.bullets_allowed -= 10
             ship.fire = False

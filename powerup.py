@@ -5,12 +5,13 @@ import random
 
 class Powerup(Sprite):
 
-    def __init__(self, ai_settings, screen):
+    def __init__(self, ai_settings, screen, images):
         super(Powerup, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
-        self.image = pygame.image.load('images/dogeup.png')
+        self.type = random.choice(['autofire', 'pierce'])
+        self.image = images.powerup_images[self.type]
         self.rect = self.image.get_rect()
 
         self.rect.x = random.randint(0, ai_settings.screen_width)
