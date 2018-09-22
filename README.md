@@ -1,7 +1,7 @@
 # space-shooter
 ok so this is the **real shit**
 
-**LAUNCH = alien_shooter.py**
+**LAUNCH = alien_invasion.py**
 
 gameplay options:
 
