@@ -1,5 +1,6 @@
 # space-shooter
 ok so this is the **real shit**
+**LAUNCH = alien_shooter.py**
 
 gameplay options:
 
