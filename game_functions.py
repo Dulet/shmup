@@ -97,7 +97,10 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds
 
 
 def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds):
-    hit = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    if ai_settings.pierce == 0:
+        hit = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    else:
+        hit = pygame.sprite.groupcollide(bullets, aliens, False, True)
     if hit:
         stats.score += ai_settings.alien_points
         sb.prep_score()
@@ -153,7 +156,7 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets, images):
     aliens.update()
     if pygame.sprite.spritecollide(ship, aliens, False):
         ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
-        print("ooh... ooohh.... *nuts and dies*")
+        print("ooh... ooohh.... *dies*")
     check_aliens_bottom(screen, aliens)
 
 
@@ -167,18 +170,26 @@ def powerup_check(ship, powerups, ai_settings, images):
     hits = pygame.sprite.spritecollide(ship, powerups, True)
     for hit in hits:
         if hit.type == 'autofire':
+            print("autofire")
             ai_settings.autofire = True
             ai_settings.bullets_allowed += 10
             ai_settings.autofire_timer = int(ai_settings.frame_count/60)
         if hit.type == 'pierce':
-            ai_settings.bullet_speed_factor += 2
-            ai_settings.bullets_allowed += 1
+            print("pierce bullet")
+            ai_settings.pierce = 1
+            ai_settings.pierce_timer = int(ai_settings.frame_count/60)
 
     if ai_settings.autofire:
         if int(ai_settings.frame_count / 60) - ai_settings.autofire_timer > 15:
+            print("autofire ends")
             ai_settings.autofire = False
             ai_settings.bullets_allowed -= 10
             ship.fire = False
+
+    if ai_settings.pierce == 1:
+        if int(ai_settings.frame_count / 60) - ai_settings.pierce_timer > 10:
+            print("pierce ends")
+            ai_settings.pierce = 0
 
 def level_up(ai_settings):
     ai_settings.meme = int(ai_settings.frame_count/1800)

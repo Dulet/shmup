@@ -29,7 +29,7 @@ class Alien(Sprite):
 
 
     def blitme(self):
-        """draw alien on le screen"""
+        """draw alien on screen"""
         self.screen.blit(self.image, self.rect)
 
     def check_edges(self):

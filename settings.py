@@ -48,8 +48,12 @@ class Settings():
         self.max_stars_speed = 10
         self.stars_allowed = 100
 
+        # powerup settings
         self.powerup_allowed = 1
         self.autofire_timer = 0
+        self.pierce_timer = 0
+        self.pierce = 0
+
 
     def default_settings(self):
         self.next_level = 1
