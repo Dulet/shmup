@@ -1,4 +1,5 @@
 # space-shooter
+**pygame needed!**
 **LAUNCH = alien_invasion.py**
 
 gameplay options:
