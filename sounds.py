@@ -5,3 +5,4 @@ class Sounds():
 
         self.fire = pygame.mixer.Sound('sounds/6.wav')
         self.boom = pygame.mixer.Sound('sounds/boom.wav')
+        self.hit = pygame.mixer.Sound('sounds/hit.wav')

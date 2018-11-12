@@ -9,8 +9,7 @@ class Powerup(Sprite):
         super(Powerup, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
-
-        self.type = random.choice(['autofire', 'pierce'])
+        self.type = random.choice(['autofire', 'pierce', 'bullet', 'speed'])
         self.image = images.powerup_images[self.type]
         self.rect = self.image.get_rect()
 
