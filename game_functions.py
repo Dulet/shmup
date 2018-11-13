@@ -1,12 +1,10 @@
 import sys
 import pygame
-import random
 import time
 from bullet import Bullet
 from alien import Alien, Alien2
 from star import Star
 from powerup import Powerup
-from sounds import Sounds
 
 clock = pygame.time.Clock()
 frame_rate = 60
@@ -173,7 +171,7 @@ def update_timer(ai_settings):
     clock.tick(frame_rate)
     return total_seconds
 
-def powerup_check(ship, powerups, ai_settings, images):
+def powerup_check(ship, powerups, ai_settings, images, sounds):
     hits = pygame.sprite.spritecollide(ship, powerups, True)
     for hit in hits:
 
@@ -191,6 +189,7 @@ def powerup_check(ship, powerups, ai_settings, images):
 
         if hit.type == "bullet":
             print("extra bullet")
+            sounds.extrabullet.play()
             ai_settings.bullets_allowed += 1
 
         if hit.type == "speed":
@@ -205,9 +204,11 @@ def powerup_check(ship, powerups, ai_settings, images):
             ship.fire = False
 
     if ai_settings.pierce == 1:
+        images.bullet = pygame.image.load("images/laser2.png")
         if int(ai_settings.frame_count / 60) - ai_settings.pierce_timer > 5:
             print("pierce ends")
             ai_settings.pierce = 0
+            images.bullet = pygame.image.load("images/laserblue.png")
 
 def level_up(ai_settings):
     ai_settings.meme = int(ai_settings.frame_count/1800)
@@ -220,7 +221,7 @@ def level_up(ai_settings):
         ai_settings.next_level = ai_settings.next_level + 1
 
 
-def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+def ship_hit(ai_settings, stats, screen, ship, aliens, bullets, sb):
     if stats.ships_left > 0:
         stats.ships_left -= 1
         print("lives left:" + str(stats.ships_left))
@@ -238,6 +239,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         bullets.empty()
         ai_settings.default_settings()
         print("game over, score: " + str(stats.score))
-        stats.reset_stats = 0
+        stats.score -= stats.score
+        sb.prep_score()
     ship.center_ship()
 
