@@ -1,6 +1,8 @@
 import random
 
 from pygame.sprite import Sprite
+import pygame
+RED = (255, 0, 0)
 
 class BaseAlien(Sprite):
     """skeleton body hhehe"""
@@ -22,8 +24,8 @@ class BaseAlien(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-        self.health = ai_settings.alien_health
-        self.points = ai_settings.alien_points
+        self.radius = 20
+        pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
 
     def blitme(self):
         """draw alien on screen"""

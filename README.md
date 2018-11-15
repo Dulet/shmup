@@ -23,4 +23,6 @@ At the beginning you get 3 ammo, means you can have three bullets on the screen 
 
 **Doge juice** - doubles your current ammo, and allows you to autofire
 
+**Double shot and Triple shot**
+
 You get three lives, once you lose them all, game ends.

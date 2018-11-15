@@ -1,7 +1,7 @@
+import game_functions as gf
 import pygame
-from bullet import Bullet  #used when you want to autofire
-import time #autofire
-
+import pygame
+RED = (255, 0, 0)
 class Ship:
 
     def __init__(self, ai_settings, screen, images):
@@ -18,6 +18,8 @@ class Ship:
         # draw the ship at the bottom center of the screen
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
+        self.radius = 25
+
 
         self.center = float(self.rect.centerx)
         self.bottom = float(self.rect.bottom)
@@ -28,6 +30,7 @@ class Ship:
         self.moving_up = False
         self.moving_down = False
         self.fire = False # autofire
+
 
     def update(self, bullets, ai_settings, screen, ship, sounds, images):
         """update the ship movement depending on keypress"""
@@ -43,8 +46,7 @@ class Ship:
         if self.fire and len(bullets) < ai_settings.bullets_allowed:
             if ai_settings.fire_cooldown == ai_settings.shoot_cooldown:
                 ai_settings.fire_cooldown = 0
-                new_bullet = Bullet(ai_settings, screen, ship, images)
-                bullets.add(new_bullet)
+                gf.fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
                 sounds.fire.play()
             else:
                 ai_settings.fire_cooldown = ai_settings.fire_cooldown + 1
@@ -59,5 +61,6 @@ class Ship:
     def blitme(self):
         """draw the ship at the created location"""
         self.screen.blit(self.image, self.rect)
+        pygame.draw.circle(self.image, (255, 0, 255), self.rect.center, 25)
 
 

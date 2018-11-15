@@ -1,7 +1,8 @@
 import pygame
 from pygame.sprite import Sprite
 import random
-
+powerups = ['autofire', 'pierce', 'bullet', 'speed', "double", "triple"]
+weights = [2, 2, 5, 3, 2, 1]
 
 class Powerup(Sprite):
 
@@ -9,8 +10,9 @@ class Powerup(Sprite):
         super(Powerup, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
-        self.type = random.choice(['autofire', 'pierce', 'bullet', 'speed'])
-        self.image = images.powerup_images[self.type]
+        self.type = random.choices(powerups, weights, k=1)
+        print(self.type)
+        self.image = images.powerup_images[self.type[0]]
         self.rect = self.image.get_rect()
 
         self.rect.x = random.randint(0, ai_settings.screen_width)
