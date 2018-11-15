@@ -47,7 +47,6 @@ class Ship:
             if ai_settings.fire_cooldown == ai_settings.shoot_cooldown:
                 ai_settings.fire_cooldown = 0
                 gf.fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
-                sounds.fire.play()
             else:
                 ai_settings.fire_cooldown = ai_settings.fire_cooldown + 1
 

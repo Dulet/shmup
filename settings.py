@@ -71,8 +71,8 @@ class Settings():
 
         # powerup settings
         self.powerup_allowed = 3
-        self.powerup_cooldown = 1
-        self.powerup_increase = 1
+        self.powerup_cooldown = 5
+        self.powerup_increase = 8
         self.autofire_timer = 0
         self.pierce_timer = 0
         self.pierce = 0
