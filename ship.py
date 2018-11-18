@@ -42,7 +42,8 @@ class Ship:
             self.rect.centery -= self.ai_settings.ship_speed_factor
         if self.moving_down and self.screen_rect.bottom > self.rect.bottom:
             self.rect.centery += self.ai_settings.ship_speed_factor + 0.5
-        #autofire
+
+        # autofire
         if self.fire and len(bullets) < ai_settings.bullets_allowed:
             if ai_settings.fire_cooldown == ai_settings.shoot_cooldown:
                 ai_settings.fire_cooldown = 0

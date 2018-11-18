@@ -84,11 +84,14 @@ def fire_bullet(ai_settings, screen, ship, bullets, sounds, images):
         triple_shot = Bullet31(ai_settings, screen, ship, images), Bullet32(ai_settings, screen, ship, images), Bullet33(ai_settings, screen, ship, images)
         if ai_settings.bullet_type == 1:
             bullets.add(single_shot)
+            sounds.shipshot.play()
         if ai_settings.bullet_type == 2:
             bullets.add(double_shot)
+            sounds.shipshot2.play()
         if ai_settings.bullet_type == 3:
             bullets.add(triple_shot)
-        sounds.fire.play()
+            sounds.shipshot3.play()
+
 
 
 def update_bullets(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds):
@@ -139,11 +142,11 @@ def update_stars(stars, ai_settings):
         if star.rect.bottom >= ai_settings.screen_height:
             stars.remove(star)
 
-def create_stars(ai_settings, screen, stars):
+def create_stars(ai_settings, screen, stars, images):
     number_stars_x = ai_settings.stars_allowed
     for star_amount in range(number_stars_x):
         if len(stars) < number_stars_x:
-            star = Star(ai_settings, screen)
+            star = Star(ai_settings, screen, images)
             stars.add(star)
 
 def create_alien(ai_settings, screen, aliens, images):
@@ -222,17 +225,17 @@ def powerup_check(ship, powerups, ai_settings, images, sounds):
             ship.fire = False
 
     if ai_settings.pierce == 1:
-        images.bullet = pygame.image.load("images/laserred.png")
+        images.pierce()
         if int(ai_settings.frame_count / 60) - ai_settings.pierce_timer > 5:
             print("pierce ends")
             ai_settings.pierce = 0
-            images.bullet = pygame.image.load("images/laserblue.png")
+            images.default()
 
 def level_up(ai_settings):
-    ai_settings.meme = int(ai_settings.frame_count/1800)
+    ai_settings.meme = int(ai_settings.frame_count/1200)
     if ai_settings.meme == ai_settings.next_level:
         print("next level")
-        ai_settings.alien_points += int((ai_settings.next_level**1.2))
+        ai_settings.alien_points += int((ai_settings.next_level ** 1.2))
         ai_settings.alien2_points += int((ai_settings.next_level ** 1.2))
         ai_settings.aliens_allowed += 5
         ai_settings.alien_speed += 0.20

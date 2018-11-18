@@ -5,12 +5,12 @@ import random
 
 class Star(Sprite):
 
-    def __init__(self, ai_settings, screen):
+    def __init__(self, ai_settings, screen, images):
         super(Star, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
-        self.image = pygame.image.load('images/star3.png')
+        self.image = images.star
         self.rect = self.image.get_rect()
 
         self.rect.x = random.randint(0, ai_settings.screen_width)

@@ -18,7 +18,6 @@ class BulletBase(Sprite):
         self.rect.top = ship.rect.top
         #self.rect2.centerx = ship.rect.centerx + 50
         #self.rect2.top = ship.rect.top
-        self.sound = pygame.mixer.Sound("sounds/lazer.wav")
 
         # store the bullet's position as decimal value
         self.x = float(self.rect.x)
@@ -87,7 +86,6 @@ class Bullet31(BulletBase):
 class Bullet32(BulletBase):
     def __init__(self, ai_settings, screen, ship, images):
         super().__init__(ai_settings, screen, ship, images)
-        self.rect.centerx -= 10
         self.rect.x -= self.speed_factor
         self.image = images.bullet21
         print(self.rect.centerx)
@@ -100,7 +98,6 @@ class Bullet32(BulletBase):
 class Bullet33(BulletBase):
     def __init__(self, ai_settings, screen, ship, images):
         super().__init__(ai_settings, screen, ship, images)
-        self.rect.centerx += 10
         self.rect.x += self.speed_factor
         self.image = images.bullet22
         print(self.rect.centerx)

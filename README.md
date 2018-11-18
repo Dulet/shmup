@@ -1,4 +1,6 @@
 # space-shooter
+<h1> If you want to launch the game without python, use "shmup_installer.exe"</h1>
+
 **pygame needed!**
 **LAUNCH = alien_invasion.py**
 
@@ -8,21 +10,11 @@ gameplay options:
 
 **<kbd>A</kbd> - Fire**
 
-Game gets slightly harder every 30 seconds, with increased kill score each level
+Game gets slightly harder every 20 seconds, with increased kill score each level
 
 
 The point of the game is simple: shoot aliens, score high, don't get hit.
 
-At the beginning you get 3 ammo, means you can have three bullets on the screen at the same time. There are powerups that can upgrade your arsenal, such as:
-
-**B** - gives you extra bullet
-
-**Thunder** - giving you extra bullet speed
-
-**Arrows** - give you unstoppable bulletsthat kills everything on its track
-
-**Doge juice** - doubles your current ammo, and allows you to autofire
-
-**Double shot and Triple shot**
+At the beginning you get 5 ammo, means you can have five bullets on the screen at the same time. There are powerups that can upgrade your arsenal.
 
 You get three lives, once you lose them all, game ends.

@@ -6,14 +6,14 @@ class Settings():
     def __init__(self):
         """here settings"""
         # screen settings
-        self.screen_width = 600
+        self.screen_width = 1000
         self.screen_height = 800
 
         # alien settings
         self.alien_speed = 1
         self.fleet_direction = 1
         self.fleet_drop_speed = 5
-        self.aliens_allowed = 10
+        self.aliens_allowed = 15
 
         # alien1
         self.alien_health = 0

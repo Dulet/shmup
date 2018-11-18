@@ -54,7 +54,7 @@ def run_game():
                          play_button, counter, powerups, sounds)
         if stats.game_active:
             gf.update_bullets(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds)
-            gf.create_stars(ai_settings, screen, stars)
+            gf.create_stars(ai_settings, screen, stars, images)
             gf.create_powerup(ai_settings, screen, powerups, images)
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets, images)
             gf.update_stars(stars, ai_settings)
