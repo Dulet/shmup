@@ -12,7 +12,7 @@ class Settings():
         # alien settings
         self.alien_speed = 1
         self.fleet_direction = 1
-        self.fleet_drop_speed = 5
+        self.fleet_drop_speed = 10
         self.aliens_allowed = 15
 
         # alien1
@@ -36,7 +36,7 @@ class Settings():
 
         # bullet statistics
         self.bullets_allowed = 5
-        self.bullet_speed_factor = 5
+        self.bullet_speed_factor = 15
 
         # bullet aesthetics
         self.bullet_width = 1
