@@ -42,10 +42,10 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds, imag
     elif event.key == pygame.K_DOWN:
         ship.moving_down = True
     elif event.key == pygame.K_a:
-        if ai_settings.autofire:
-            ship.fire = True
-        else:
-            fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
+        # if ai_settings.autofire:
+        ship.fire = True
+        # else:
+        #     fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
 
 
 def check_keyup_events(event, ship):
@@ -187,6 +187,7 @@ def powerup_check(ship, powerups, ai_settings, images, sounds):
         if hit.type[0] == 'autofire':
             if not ai_settings.autofire:
                 print("autofire")
+                ai_settings.shoot_cooldown /= 2
                 ai_settings.autofire = True
                 ai_settings.bullets_allowed *= 2
                 ai_settings.autofire_timer = int(ai_settings.frame_count/60)
