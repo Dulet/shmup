@@ -15,6 +15,7 @@ Game gets slightly harder every 20 seconds, with increased kill score each level
 
 The point of the game is simple: shoot aliens, score high, don't get hit.
 
-At the beginning you get 5 ammo, means you can have five bullets on the screen at the same time. There are powerups that can upgrade your arsenal.
+Hold A and turn these poorly designed aliens to mush!!
+There are powerups that can upgrade your arsenal.
 
 You get three lives, once you lose them all, game ends.
