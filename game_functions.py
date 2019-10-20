@@ -42,10 +42,10 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds, imag
     elif event.key == pygame.K_DOWN:
         ship.moving_down = True
     elif event.key == pygame.K_a:
-        if ai_settings.autofire:
-            ship.fire = True
-        else:
-            fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
+        # if ai_settings.autofire:
+        ship.fire = True
+        # else:
+        #     fire_bullet(ai_settings, screen, ship, bullets, sounds, images)
 
 
 def check_keyup_events(event, ship):
@@ -186,10 +186,12 @@ def powerup_check(ship, powerups, ai_settings, images, sounds):
     for hit in hits:
         if hit.type[0] == 'autofire':
             if not ai_settings.autofire:
-                print("autofire")
+                # print("autofire")
                 ai_settings.autofire = True
-                ai_settings.bullets_allowed *= 2
+                # ai_settings.bullets_allowed *= 2
+                ai_settings.shoot_cooldown -= 5
                 ai_settings.autofire_timer = int(ai_settings.frame_count/60)
+                print(ai_settings.autofire_timer)
 
         if hit.type[0] == 'pierce':
             print("pierce bullet")
@@ -221,8 +223,8 @@ def powerup_check(ship, powerups, ai_settings, images, sounds):
         if int(ai_settings.frame_count / 60) - ai_settings.autofire_timer > 5:
             print("autofire ends")
             ai_settings.autofire = False
-            ai_settings.bullets_allowed /= 2
-            ship.fire = False
+            ai_settings.shoot_cooldown += 5
+
 
     if ai_settings.pierce == 1:
         images.pierce()

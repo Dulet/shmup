@@ -10,8 +10,8 @@ class Images():
         self.bullet21 = pygame.image.load("images/bullet33.png")
         self.bullet22 = pygame.image.load("images/bullet32.png")
         self.ship = pygame.image.load('images/ship.png')
-        self.alien = pygame.image.load("images/alieneasy.png")
-        self.alien2 = pygame.image.load("images/alien2.png")
+        self.alien = pygame.image.load("images/alieneasy2.1.png")
+        self.alien2 = pygame.image.load("images/alien2.1.png")
         self.star = pygame.image.load("images/star3.png")
         self.powerup_images = {}
         self.powerup_images["speed"] = pygame.image.load("images/bulletspeed.png")

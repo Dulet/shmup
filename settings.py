@@ -10,17 +10,17 @@ class Settings():
         self.screen_height = 800
 
         # alien settings
-        self.alien_speed = 1
+        self.alien_speed = 1.5
         self.fleet_direction = 1
         self.fleet_drop_speed = 5
         self.aliens_allowed = 15
 
         # alien1
-        self.alien_health = 0
+        self.alien_health = 1
         self.alien_points = 50
 
         # alien2
-        self.alien2_health = 1
+        self.alien2_health = 3
         self.alien2_points = 75
 
         # background color
@@ -35,8 +35,8 @@ class Settings():
         self.bullet3_damage = 3
 
         # bullet statistics
-        self.bullets_allowed = 5
-        self.bullet_speed_factor = 5
+        self.bullets_allowed = 50
+        self.bullet_speed_factor = 15
 
         # bullet aesthetics
         self.bullet_width = 1
@@ -44,8 +44,8 @@ class Settings():
         self.bullet_color = 10, 210, 92
 
         # autofire settings
-        self.fire_cooldown = 0
-        self.shoot_cooldown = 5
+        self.fire_cooldown = 10
+        self.shoot_cooldown = 10
         self.autofire = False
 
 
@@ -62,7 +62,7 @@ class Settings():
         # ship settings
         self.ship_invulnerability = 200
         self.counter = 0
-        self.ship_speed_factor = 10
+        self.ship_speed_factor = 14
         self.ship_limit = 2
 
         # stars settings

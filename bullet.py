@@ -80,7 +80,7 @@ class Bullet31(BulletBase):
     def __init__(self, ai_settings, screen, ship, images):
         super().__init__(ai_settings, screen, ship, images)
         self.image = images.bullet2
-        print(self.rect.centerx)
+        # print(self.rect.centerx)
 
 
 class Bullet32(BulletBase):
@@ -88,7 +88,7 @@ class Bullet32(BulletBase):
         super().__init__(ai_settings, screen, ship, images)
         self.rect.x -= self.speed_factor
         self.image = images.bullet21
-        print(self.rect.centerx)
+        # print(self.rect.centerx)
 
     def update(self):
         super().update()
@@ -100,7 +100,7 @@ class Bullet33(BulletBase):
         super().__init__(ai_settings, screen, ship, images)
         self.rect.x += self.speed_factor
         self.image = images.bullet22
-        print(self.rect.centerx)
+        # print(self.rect.centerx)
 
     def update(self):
         super().update()
