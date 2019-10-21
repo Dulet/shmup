@@ -35,7 +35,7 @@ class Settings():
         self.bullet3_damage = 3
 
         # bullet statistics
-        self.bullets_allowed = 50
+        self.bullets_allowed = 15
         self.bullet_speed_factor = 15
 
         # bullet aesthetics
@@ -44,9 +44,10 @@ class Settings():
         self.bullet_color = 10, 210, 92
 
         # autofire settings
-        self.fire_cooldown = 10
-        self.shoot_cooldown = 10
+        self.fire_cooldown = 0
+        self.shoot_cooldown = 6
         self.autofire = False
+        self.test = False
 
 
         # level settings

@@ -60,7 +60,7 @@ def run_game():
             gf.update_stars(stars, ai_settings)
             gf.update_powerup(powerups, ai_settings)
             gf.update_timer(ai_settings)
-            gf.powerup_check(ship, powerups, ai_settings, images, sounds)
+            gf.powerup_check(ship, powerups, ai_settings, images, sounds, stats)
             bullets.update()
             stars.update()
             powerups.update()
