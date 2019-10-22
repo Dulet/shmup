@@ -2,7 +2,7 @@ import pygame
 from pygame.sprite import Sprite
 import random
 powerups = ['autofire', 'pierce', 'bullet', 'speed', "double", "triple"]
-weights = [1111111110, 2, 0, 2, 1, 0.7]
+weights = [1, 2, 0, 2, 1, 0.7]
 
 class Powerup(Sprite):
 

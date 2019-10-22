@@ -2,9 +2,10 @@ import sys
 import pygame
 import time
 from bullet import Bullet, Bullet21, Bullet22, Bullet31, Bullet32, Bullet33
-from alien import Alien, Alien2
+from alien import BaseAlien
 from star import Star
 from powerup import Powerup
+import random
 
 clock = pygame.time.Clock()
 frame_rate = 60
@@ -151,13 +152,19 @@ def create_stars(ai_settings, screen, stars, images):
             stars.add(star)
 
 def create_alien(ai_settings, screen, aliens, images):
-    number_aliens_x = ai_settings.aliens_allowed
-    for alien_amount in range(number_aliens_x):
-        if len(aliens) < number_aliens_x:
-            alien = Alien(ai_settings, screen, images)
-            alien2 = Alien2(ai_settings, screen, images)
-            aliens.add(alien)
-            aliens.add(alien2)
+    if ai_settings.frame_count - ai_settings.aliencd >= 30:
+        print(ai_settings.frame_count - ai_settings.aliencd)
+        ai_settings.aliencount += 1
+    # if ai_settings.aliens_allowed >= 10:
+    #     ai_settings.aliens_allowed = 2
+    if ai_settings.alienadded != ai_settings.aliencount:
+        alien_class = random.choice(BaseAlien.__subclasses__())
+        new_alien = alien_class(ai_settings, screen, images)
+        aliens.add(new_alien)
+        ai_settings.aliencd = ai_settings.frame_count
+        ai_settings.alienadded = ai_settings.aliencount
+        print(ai_settings.aliencd)
+
 
 
 def check_aliens_bottom (screen, aliens):

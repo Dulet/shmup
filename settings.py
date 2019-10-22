@@ -13,7 +13,11 @@ class Settings():
         self.alien_speed = 1.5
         self.fleet_direction = 1
         self.fleet_drop_speed = 5
-        self.aliens_allowed = 15
+        self.aliens_allowed = 1
+        self.aliencount = 0
+        self.alienadded = 0
+        self.aliencd = 0
+        self.distance = 0
 
         # alien1
         self.alien_health = 1

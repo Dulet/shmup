@@ -3,7 +3,6 @@ import random
 from pygame.sprite import Sprite
 import pygame
 RED = (255, 0, 0)
-
 class BaseAlien(Sprite):
     """skeleton body hhehe"""
     def __init__(self, ai_settings, screen, images):
@@ -11,25 +10,58 @@ class BaseAlien(Sprite):
         self.screen = screen
         self.ai_settings = ai_settings
 
+
         # load the god damn alien from the image
         self.image = images.alien
         self.rect = self.image.get_rect()
 
         # start new alien from top left of the screen
-        self.rect.x = random.randint(35, ai_settings.screen_width-35)
-        self.rect.y = random.randint(-4 * ai_settings.screen_height,
-                                     -1 * ai_settings.screen_height)
 
-        # store the aliens position
+        if ai_settings.aliencount < 10:
+            self.rect.x = ai_settings.screen_width/2 - 35
+            self.rect.y = -ai_settings.screen_height+100
+
+        if 10 <= ai_settings.aliencount <= 30:
+            self.rect.y = -ai_settings.screen_height+100
+            if ai_settings.distance%2 == 0:
+                self.rect.x = (ai_settings.screen_width/2) - 35 - 20*ai_settings.distance
+                print(self.rect.x, "minus")
+                ai_settings.distance += 1
+            else:
+                self.rect.x = (ai_settings.screen_width/2) - 35 + 20* ai_settings.distance
+                print(self.rect.x, "plus")
+                ai_settings.distance += 1
+        if ai_settings.aliencount > 30:
+            self.rect.y = -ai_settings.screen_height + 100
+            if ai_settings.distance == 0:
+                self.rect.x = ai_settings.screen_width / 2 - 35
+                self.rect.y = -ai_settings.screen_height + 100
+            elif ai_settings.distance % 2 == 0:
+                self.rect.x = (ai_settings.screen_width / 2) - 35 - 20 * ai_settings.distance
+                print(self.rect.x, "minus")
+                ai_settings.distance -= 1
+            elif ai_settings.distance % 2 != 0:
+                self.rect.x = (ai_settings.screen_width / 2) - 35 + 20 * ai_settings.distance
+                print(self.rect.x, "plus")
+                ai_settings.distance -= 1
+
+
+
+            print(ai_settings.aliencount, "aliens: ")
+        # else:
+        #     self.rect.x = random.randint(35, ai_settings.screen_width-35)
+        #     self.rect.y = random.randint(-4 * ai_settings.screen_height,
+        #                                  -1 * ai_settings.screen_height)
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
         self.radius = 20
         pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
 
-    def blitme(self):
+    def blitme(self, aliencount):
         """draw alien on screen"""
         self.screen.blit(self.image, self.rect)
+
 
     def check_edges(self):
         screen_rect = self.screen.get_rect()
