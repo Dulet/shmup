@@ -40,6 +40,7 @@ def run_game():
     stats = GameStats(ai_settings)
     sb = Scoreboard(ai_settings, screen, stats)
     counter = Counter(ai_settings, screen, stats)
+    speed = ai_settings.speed
 
     # create a fleet
     if stats.game_active:

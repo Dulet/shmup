@@ -34,15 +34,26 @@ class Ship:
 
     def update(self, bullets, ai_settings, screen, ship, sounds, images):
         """update the ship movement depending on keypress"""
+        global speed
         if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.center += self.ai_settings.ship_speed_factor
-        if self.moving_left and self.rect.left > 0:
-            self.center -= self.ai_settings.ship_speed_factor
-        if self.moving_up and self.rect.top > self.screen_rect.top:
-            self.rect.centery -= self.ai_settings.ship_speed_factor
-        if self.moving_down and self.screen_rect.bottom > self.rect.bottom:
-            self.rect.centery += self.ai_settings.ship_speed_factor + 0.5
-
+            if speed <= ai_settings.max_speed:
+                speed *= ai_settings.ship_acceleration
+            self.center += speed 
+            print(speed)
+        elif self.moving_left and self.rect.left > 0:
+            if speed <= ai_settings.max_speed:
+                speed *= ai_settings.ship_acceleration
+            self.center -= speed
+        elif self.moving_up and self.rect.top > self.screen_rect.top:
+            if speed <= ai_settings.max_speed:
+                speed *= ai_settings.ship_acceleration
+            self.rect.centery -= speed
+        elif self.moving_down and self.screen_rect.bottom > self.rect.bottom:
+            if speed <= ai_settings.max_speed:
+                speed *= ai_settings.ship_acceleration
+            self.rect.centery += speed
+        else:
+            speed = ai_settings.ship_speed_factor
         # autofire
         if self.fire and len(bullets) < ai_settings.bullets_allowed:
             if ai_settings.fire_cooldown == ai_settings.shoot_cooldown:

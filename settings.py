@@ -63,7 +63,10 @@ class Settings():
         # ship settings
         self.ship_invulnerability = 200
         self.counter = 0
-        self.ship_speed_factor = 14
+        self.ship_speed_factor = 3
+        self.max_speed = self.ship_speed_factor*3.5
+        self.ship_acceleration = 1.1
+        self.speed = self.ship_speed_factor
         self.ship_limit = 2
 
         # stars settings
