@@ -39,7 +39,6 @@ class Ship:
             if speed <= ai_settings.max_speed:
                 speed *= ai_settings.ship_acceleration
             self.center += speed 
-            print(speed)
         elif self.moving_left and self.rect.left > 0:
             if speed <= ai_settings.max_speed:
                 speed *= ai_settings.ship_acceleration
