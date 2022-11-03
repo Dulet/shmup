@@ -45,7 +45,7 @@ class Settings():
 
         # autofire settings
         self.fire_cooldown = 0
-        self.shoot_cooldown = 6
+        self.shoot_cooldown = 8
         self.autofire = False
         self.test = False
 

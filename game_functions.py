@@ -42,7 +42,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds, imag
     elif event.key == pygame.K_DOWN:
         ship.moving_down = True
     elif event.key == pygame.K_a:
-        # if ai_settings.autofire:
+        # if ai_settings.autofire: # manual button pressing 
         ship.fire = True
         print(ship.fire)
         # else:
@@ -63,7 +63,7 @@ def check_keyup_events(event, ship):
 
 def update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets, play_button, counter, powerups, sounds):
     """update images on screen and flip on the new screen"""
-     # redraw all bullets behind ship
+     # redraw all bullets under ship
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     if not stats.game_active:
