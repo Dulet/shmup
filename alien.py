@@ -5,13 +5,13 @@ import pygame
 RED = (255, 0, 0)
 
 class BaseAlien(Sprite):
-    """skeleton body hhehe"""
+    """alien: skeleton body"""
     def __init__(self, ai_settings, screen, images):
         super(BaseAlien, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
-        # load the god damn alien from the image
+        # load the alien from the image
         self.image = images.alien
         self.rect = self.image.get_rect()
 
@@ -25,7 +25,7 @@ class BaseAlien(Sprite):
         self.y = float(self.rect.y)
 
         self.radius = 20
-        pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
+        // pygame.draw.circle(self.image, RED, self.rect.center, self.radius) 
 
     def blitme(self):
         """draw alien on screen"""
