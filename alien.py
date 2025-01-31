@@ -41,9 +41,6 @@ class BaseAlien(Sprite):
         # self.x += (self.ai_settings.alien_speed * self.ai_settings.fleet_direction)
         # self.y += random.randint(self.ai_settings.alien_speed, 2*self.ai_settings.alien_speed)
         self.y += self.ai_settings.alien_speed
-        t = pygame.time.get_ticks() / 2 % 800
-        self.x = math.sin(t/50.0) * 50
-        # print(self.x)
         self.rect.x = self.x
         self.rect.y = self.y
 

@@ -36,7 +36,7 @@ class Settings():
 
         # bullet statistics
         self.bullets_allowed = 99
-        self.bullet_speed_factor = 20
+        self.bullet_speed_factor = 10
 
         # bullet aesthetics
         self.bullet_width = 1
