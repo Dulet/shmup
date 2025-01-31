@@ -6,13 +6,13 @@ import pygame
 RED = (255, 0, 0)
 
 class BaseAlien(Sprite):
-    """skeleton body hhehe"""
+    """alien: skeleton body"""
     def __init__(self, ai_settings, screen, images):
         super(BaseAlien, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
-        # load the god damn alien from the image
+        # load the alien from the image
         self.image = images.alien
         self.rect = self.image.get_rect()
 
@@ -24,7 +24,7 @@ class BaseAlien(Sprite):
         # store the aliens position
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
-        
+
 
 
         self.radius = 20
@@ -43,7 +43,7 @@ class BaseAlien(Sprite):
         self.y += self.ai_settings.alien_speed
         t = pygame.time.get_ticks() / 2 % 800
         self.x = math.sin(t/50.0) * 50
-        print(self.x)
+        # print(self.x)
         self.rect.x = self.x
         self.rect.y = self.y
 
