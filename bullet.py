@@ -30,7 +30,7 @@ class BulletBase(Sprite):
 
         # randomizes the bullet color each shot
         # self.color = random.randint(1, 255), random.randint(1, 255), random.randint(1, 255)
-        self.color = self.color
+        # self.color = self.color
 
         self.damage = ai_settings.bullet1_damage
 

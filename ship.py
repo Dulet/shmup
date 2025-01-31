@@ -29,7 +29,7 @@ class Ship:
         self.moving_left = False
         self.moving_up = False
         self.moving_down = False
-        self.fire = False # autofire
+        self.fire = False # autofire if true
 
 
     def update(self, bullets, ai_settings, screen, ship, sounds, images):

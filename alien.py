@@ -1,4 +1,5 @@
 import random
+import math
 
 from pygame.sprite import Sprite
 import pygame
@@ -23,13 +24,11 @@ class BaseAlien(Sprite):
         # store the aliens position
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
+        
+
 
         self.radius = 20
-        pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
 
-    def blitme(self):
-        """draw alien on screen"""
-        self.screen.blit(self.image, self.rect)
 
     def check_edges(self):
         screen_rect = self.screen.get_rect()
@@ -42,6 +41,9 @@ class BaseAlien(Sprite):
         # self.x += (self.ai_settings.alien_speed * self.ai_settings.fleet_direction)
         # self.y += random.randint(self.ai_settings.alien_speed, 2*self.ai_settings.alien_speed)
         self.y += self.ai_settings.alien_speed
+        t = pygame.time.get_ticks() / 2 % 800
+        self.x = math.sin(t/50.0) * 50
+        print(self.x)
         self.rect.x = self.x
         self.rect.y = self.y
 
