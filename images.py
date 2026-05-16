@@ -9,6 +9,7 @@ class Images():
         self.bullet2 = pygame.image.load("images/bullet3.png")
         self.bullet21 = pygame.image.load("images/bullet32.png")
         self.bullet22 = pygame.image.load("images/bullet33.png")
+        self.bullet4 = pygame.image.load("images/bullet4.png")
         self.ship = pygame.image.load('images/ship.png')
         self.alien = pygame.image.load("images/alieneasy.png")
         self.alien2 = pygame.image.load("images/alien2.png")
@@ -20,6 +21,7 @@ class Images():
         self.powerup_images["pierce"] = pygame.image.load('images/pierce.png')
         self.powerup_images["double"] = pygame.image.load("images/double.png")
         self.powerup_images["triple"] = pygame.image.load("images/triple.png")
+        self.powerup_images["quadruple"] = pygame.image.load("images/quadruple.png")
 
     def default(self):
         self.bullet = pygame.image.load("images/bullet1.png")
@@ -27,6 +29,7 @@ class Images():
         self.bullet2 = pygame.image.load("images/bullet3.png")
         self.bullet21 = pygame.image.load("images/bullet32.png")
         self.bullet22 = pygame.image.load("images/bullet33.png")
+        self.bullet4 = pygame.image.load("images/bullet4.png")
 
     def pierce(self):
         self.bullet = pygame.image.load("images/laserred.png")
@@ -34,3 +37,4 @@ class Images():
         self.bullet2 = pygame.image.load("images/laserred.png")
         self.bullet21 = pygame.image.load("images/laserred1.png")
         self.bullet22 = pygame.image.load("images/laserred2.png")
+        self.bullet4 = pygame.image.load("images/laserred.png")

@@ -29,6 +29,16 @@ def run_game():
 
     pygame.display.set_caption("Alien Invasion")
     play_button = Button(ai_settings, screen, "Play")
+    exit_button = Button(ai_settings, screen, "Exit")
+
+    # play button
+    play_button.rect.centerx = ai_settings.screen_width / 2
+    play_button.rect.centery = ai_settings.screen_height / 2 - 70
+
+    # exit button
+    exit_button.rect.centerx = play_button.rect.centerx
+    exit_button.rect.top = play_button.rect.bottom + 20
+    
     # make a ship, bullet, alien
     sounds = Sounds()
     images = Images()
@@ -50,9 +60,9 @@ def run_game():
     # main game loop
 
     while True:
-        gf.check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds, images)
+        gf.check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds, images, exit_button)
         gf.update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets,
-                         play_button, counter, powerups, sounds)
+                         play_button, counter, powerups, sounds, exit_button)
         if stats.game_active:
             gf.update_bullets(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds)
             gf.create_stars(ai_settings, screen, stars, images)
@@ -67,7 +77,6 @@ def run_game():
             powerups.update()
             aliens.update()
             ship.update(bullets, ai_settings, screen, ship, sounds, images)
-            screen.fill(ai_settings.bg_color)
             # screen.blit(BackGround.image, BackGround.rect)
 
 run_game()

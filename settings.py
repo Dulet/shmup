@@ -33,6 +33,7 @@ class Settings():
         self.bullet1_damage = 1
         self.bullet2_damage = 2
         self.bullet3_damage = 3
+        self.bullet4_damage = 4
 
         # bullet statistics
         self.bullets_allowed = 99

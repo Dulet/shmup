@@ -1,7 +1,7 @@
 import sys
 import pygame
 import time
-from bullet import Bullet, Bullet21, Bullet22, Bullet31, Bullet32, Bullet33
+from bullet import Bullet, Bullet21, Bullet22, Bullet31, Bullet32, Bullet33, Bullet41, Bullet42, Bullet43, Bullet44
 from alien import Alien, Alien2
 from star import Star
 from powerup import Powerup
@@ -11,7 +11,7 @@ frame_rate = 60
 start_time = 90
 
 
-def check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds, images):
+def check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds, images, exit_button):
     """responds to specific keypresses and mouse events"""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -23,13 +23,18 @@ def check_events(ai_settings, screen, stats, play_button, ship, bullets, sounds,
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(stats, play_button, mouse_x, mouse_y)
+            check_buttons(ai_settings, screen, stats, play_button, exit_button, mouse_x, mouse_y)
 
 
-def check_play_button(stats, play_button, mouse_x, mouse_y):
-    if play_button.rect.collidepoint(mouse_x, mouse_y):
-        stats.game_active = True
-        pygame.mouse.set_visible(False)
+def check_buttons(ai_settings, screen, stats, play_button, exit_button, mouse_x, mouse_y):
+    """Check if any button was clicked."""
+    if not stats.game_active: # Only check buttons if game is not active
+        if exit_button.rect.collidepoint(mouse_x, mouse_y):
+            pygame.quit()
+            sys.exit()
+        elif play_button.rect.collidepoint(mouse_x, mouse_y):
+            stats.game_active = True
+            pygame.mouse.set_visible(False)
 
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets, sounds, images):
@@ -61,13 +66,15 @@ def check_keyup_events(event, ship):
     elif event.key == pygame.K_a:
         ship.fire = False
 
-def update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets, play_button, counter, powerups, sounds):
+def update_screen(ai_settings, screen, stats, sb, stars, ship, aliens, bullets, play_button, counter, powerups, sounds, exit_button):
     """update images on screen and flip on the new screen"""
+    screen.fill(ai_settings.bg_color)
      # redraw all bullets under ship
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     if not stats.game_active:
         play_button.draw_button()
+        exit_button.draw_button()
     sb.show_score()
     counter.show_score()
     counter.prep_score()
@@ -83,6 +90,7 @@ def fire_bullet(ai_settings, screen, ship, bullets, sounds, images):
         single_shot = Bullet(ai_settings, screen, ship, images)
         double_shot = Bullet21(ai_settings, screen, ship, images), Bullet22(ai_settings, screen, ship, images)
         triple_shot = Bullet31(ai_settings, screen, ship, images), Bullet32(ai_settings, screen, ship, images), Bullet33(ai_settings, screen, ship, images)
+        quad_shot = Bullet41(ai_settings, screen, ship, images), Bullet42(ai_settings, screen, ship, images), Bullet43(ai_settings, screen, ship, images), Bullet44(ai_settings, screen, ship, images)
         if ai_settings.bullet_type == 1:
             bullets.add(single_shot)
             sounds.shipshot.play()
@@ -92,7 +100,9 @@ def fire_bullet(ai_settings, screen, ship, bullets, sounds, images):
         if ai_settings.bullet_type == 3:
             bullets.add(triple_shot)
             sounds.shipshot3.play()
-
+        if ai_settings.bullet_type == 4:
+            bullets.add(quad_shot)
+            sounds.shipshot4.play()
 
 
 def update_bullets(ai_settings, screen, ship, aliens, bullets, sb, stats, sounds):
@@ -222,6 +232,12 @@ def powerup_check(ship, powerups, ai_settings, images, sounds, stats):
             if ai_settings.bullet_type == 3:
                 ai_settings.bullets_allowed += 3
             ai_settings.bullet_type = 3
+        
+        if hit.type[0] == "quadruple":
+            print("quadruple shot")
+            if ai_settings.bullet_type == 4:
+                ai_settings.bullets_allowed += 4
+            ai_settings.bullet_type = 4
 
     # if ai_settings.test == 1:
     #     if int(ai_settings.frame_count / 60) - ai_settings.autofire_timer > 5:
@@ -268,4 +284,3 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         print("game over, score: " + str(stats.score))
         stats.score -= stats.score
     ship.center_ship()
-

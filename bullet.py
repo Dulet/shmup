@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+import math
 
 class BulletBase(Sprite):
     """a class to manage bullets fired from the ship"""
@@ -37,13 +38,14 @@ class BulletBase(Sprite):
     def update(self):
         """move the bullet up the screen"""
         # update the decimal pos of bullet
-        self.x -= self.speed_factor
+        # self.x -= self.speed_factor
         self.y -= self.speed_factor
         #self.x1 -= self.speed_factor
         #self.y1 -= self.speed_factor
 
         # update the rectangle pos
         self.rect.y = self.y
+        self.rect.x = self.x
 
         # used to move vertically
         #self.rect.x = self.x
@@ -66,6 +68,7 @@ class Bullet21(BulletBase):
     def __init__(self, ai_settings, screen, ship, images):
         super().__init__(ai_settings, screen, ship, images)
         self.rect.centerx -= 10
+        self.x = float(self.rect.x)
         self.image = images.bullet1
 
 
@@ -73,6 +76,7 @@ class Bullet22(BulletBase):
     def __init__(self, ai_settings, screen, ship, images):
         super().__init__(ai_settings, screen, ship, images)
         self.rect.centerx += 10
+        self.x = float(self.rect.x)
         self.image = images.bullet1
 
 
@@ -88,11 +92,13 @@ class Bullet32(BulletBase):
         super().__init__(ai_settings, screen, ship, images)
         self.rect.x -= self.speed_factor
         self.image = images.bullet21
+        self.x = float(self.rect.x)
         # print(self.rect.centerx)
 
     def update(self):
         super().update()
-        self.rect.x -= self.speed_factor*0.2
+        self.x -= self.speed_factor*0.2
+        self.rect.x = self.x
 
 
 class Bullet33(BulletBase):
@@ -100,8 +106,42 @@ class Bullet33(BulletBase):
         super().__init__(ai_settings, screen, ship, images)
         self.rect.x += self.speed_factor
         self.image = images.bullet22
+        self.x = float(self.rect.x)
         # print(self.rect.centerx)
 
     def update(self):
         super().update()
-        self.rect.x += self.speed_factor*0.2
+        self.x += self.speed_factor*0.2
+        self.rect.x = self.x
+
+
+class Bullet41(BulletBase):
+    def __init__(self, ai_settings, screen, ship, images):
+        super().__init__(ai_settings, screen, ship, images)
+        self.rect.centerx -= 30 # Furthest left
+        self.x = float(self.rect.x)
+        self.image = images.bullet4
+
+
+class Bullet42(BulletBase):
+    def __init__(self, ai_settings, screen, ship, images):
+        super().__init__(ai_settings, screen, ship, images)
+        self.rect.centerx -= 10 # Inner left
+        self.x = float(self.rect.x)
+        self.image = images.bullet4
+
+
+class Bullet43(BulletBase):
+    def __init__(self, ai_settings, screen, ship, images):
+        super().__init__(ai_settings, screen, ship, images)
+        self.rect.centerx += 10 # Inner right
+        self.x = float(self.rect.x)
+        self.image = images.bullet4
+
+
+class Bullet44(BulletBase):
+    def __init__(self, ai_settings, screen, ship, images):
+        super().__init__(ai_settings, screen, ship, images)
+        self.rect.centerx += 30 # Furthest right
+        self.x = float(self.rect.x)
+        self.image = images.bullet4

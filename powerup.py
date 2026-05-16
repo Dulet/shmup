@@ -1,8 +1,8 @@
 import pygame
 from pygame.sprite import Sprite
 import random
-powerups = ['autofire', 'pierce', 'bullet', 'speed', "double", "triple"] # bullet for manual button pressing
-weights = [1, 2, 0, 2, 1, 0.7]
+powerups = ['autofire', 'pierce', 'bullet', 'speed', "double", "triple", "quadruple"] # bullet for manual button pressing
+weights = [0, 1, 1, 2, 1, 0.7, 0.7]
 
 class Powerup(Sprite):
 

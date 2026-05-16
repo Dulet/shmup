@@ -9,6 +9,8 @@ class Sounds():
         pygame.mixer.Sound.set_volume(self.shipshot2, VOLUME)
         self.shipshot3 = pygame.mixer.Sound('sounds/triple.wav')
         pygame.mixer.Sound.set_volume(self.shipshot3, VOLUME)
+        self.shipshot4 = pygame.mixer.Sound('sounds/quad.wav')
+        pygame.mixer.Sound.set_volume(self.shipshot4, VOLUME)
         self.boom = pygame.mixer.Sound('sounds/boom2.wav')
         pygame.mixer.Sound.set_volume(self.boom, VOLUME)
         self.hit = pygame.mixer.Sound('sounds/hit.wav')
